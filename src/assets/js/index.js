@@ -12,7 +12,7 @@ const fixindex = () => {
     localStorage.setItem('tasks', JSON.stringify(tasks.list));
   });
 };
-let editmain =(editbox) =>{
+const editmain = (editbox, editID, place, EditBoxId) => {
   editbox.addEventListener('keyup', (event) => {
     if (event.code === '13') {
       tasks.list[editID].description = editbox.value;
@@ -24,7 +24,7 @@ let editmain =(editbox) =>{
       taskchecker();
     }
   });
-}
+};
 const editfunc = () => {
   const edit = document.querySelectorAll('li img');
   edit.forEach((e) => {
@@ -37,13 +37,11 @@ const editfunc = () => {
       const place = `${editID}d`;
       document.getElementById(place).style.cssText = 'display: none;';
       const editbox = document.getElementById(EditBoxId);
-      editmain(editbox);
-     
+      editmain(editbox, editID, place, EditBoxId);
     });
   });
 };
 editfunc();
-
 
 const deleteTask = () => {
   const deletetask = document.querySelectorAll('li button');
