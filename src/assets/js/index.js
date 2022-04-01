@@ -12,7 +12,19 @@ const fixindex = () => {
     localStorage.setItem('tasks', JSON.stringify(tasks.list));
   });
 };
+let editmain =(editbox) =>{
+  editbox.addEventListener('keyup', (event) => {
+    if (event.code === '13') {
+      tasks.list[editID].description = editbox.value;
 
+      localStorage.setItem('tasks', JSON.stringify(tasks.list));
+      document.getElementById(EditBoxId).style.cssText = 'display: none;';
+      document.getElementById(place).style.cssText = 'display: block;';
+      renderlists();
+      taskchecker();
+    }
+  });
+}
 const editfunc = () => {
   const edit = document.querySelectorAll('li img');
   edit.forEach((e) => {
@@ -25,21 +37,14 @@ const editfunc = () => {
       const place = `${editID}d`;
       document.getElementById(place).style.cssText = 'display: none;';
       const editbox = document.getElementById(EditBoxId);
-      editbox.addEventListener('keyup', (event) => {
-        if (event.code === '13') {
-          tasks.list[editID].description = editbox.value;
-
-          localStorage.setItem('tasks', JSON.stringify(tasks.list));
-          document.getElementById(EditBoxId).style.cssText = 'display: none;';
-          document.getElementById(place).style.cssText = 'display: block;';
-          renderlists();
-          taskchecker();
-        }
-      });
+      editmain(editbox);
+     
     });
   });
 };
 editfunc();
+
+
 const deleteTask = () => {
   const deletetask = document.querySelectorAll('li button');
 
